@@ -1,0 +1,240 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://127.0.0.1:8787/w/claude",
+    "_CLAUDE_CODE_ASSUME_FIRST_PARTY_BASE_URL": "1",
+    "ENABLE_TOOL_SEARCH": "auto"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact|fork)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/herdr-agent-state.sh\" session",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.caveman/bin/caveman-proxy\" native-hook claude --adapter \"$HOME/.nvm/versions/node/v24.19.0/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/worktrunk/prune-on-start.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.caveman/bin/caveman-proxy\" native-hook claude --adapter \"$HOME/.nvm/versions/node/v24.19.0/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.caveman/bin/caveman-proxy\" native-hook claude --adapter \"$HOME/.nvm/versions/node/v24.19.0/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.nvm/versions/node/v24.19.0/bin/caveman\" shrink-hook",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/worktrunk/block-git-worktree-add.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.caveman/bin/caveman-proxy\" native-hook claude --adapter \"$HOME/.nvm/versions/node/v24.19.0/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.caveman/bin/caveman-proxy\" native-hook claude --adapter \"$HOME/.nvm/versions/node/v24.19.0/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.caveman/bin/caveman-proxy\" native-hook claude --adapter \"$HOME/.nvm/versions/node/v24.19.0/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.caveman/bin/caveman-proxy\" native-hook claude --adapter \"$HOME/.nvm/versions/node/v24.19.0/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.caveman/bin/caveman-proxy\" native-hook claude --adapter \"$HOME/.nvm/versions/node/v24.19.0/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.caveman/bin/caveman-proxy\" native-hook claude --adapter \"$HOME/.nvm/versions/node/v24.19.0/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.caveman/bin/caveman-proxy\" native-hook claude --adapter \"$HOME/.nvm/versions/node/v24.19.0/lib/node_modules/@caveman-ai/cli/dist/native-hook-fast.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "WorktreeCreate": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/worktrunk/worktree-create.sh"
+          }
+        ]
+      }
+    ],
+    "WorktreeRemove": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/worktrunk/worktree-remove.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"$HOME/.claude/statusline/statusline.sh\""
+  },
+  "enabledPlugins": {
+    "claude-code-setup@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "circleback@claude-plugins-official": false,
+    "claude-md-management@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "php-lsp@claude-plugins-official": true,
+    "learning-output-style@claude-plugins-official": true,
+    "Notion@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "explanatory-output-style@claude-plugins-official": true,
+    "warp@claude-code-warp": true,
+    "caveman@caveman": true,
+    "composio@composio": true
+  },
+  "extraKnownMarketplaces": {
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
+    },
+    "GoogleChrome": {
+      "source": {
+        "source": "github",
+        "repo": "GoogleChrome/modern-web-guidance"
+      }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "composio": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/ComposioHQ/composio-plugin-cc.git"
+      }
+    }
+  },
+  "advisorModel": "fable",
+  "skipWorkflowUsageWarning": true,
+  "agentPushNotifEnabled": true
+}

@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "automem": {
+      "type": "http",
+      "url": "https://gopibabu-automem-mcp.up.railway.app/mcp",
+      "headers": { "Authorization": "Bearer ${AUTOMEM_TOKEN}" }
+    },
+    "caveman": {
+      "type": "stdio",
+      "command": "~/.caveman/bin/caveman-mcp",
+      "args": [],
+      "env": {}
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": { "Authorization": "Bearer ${CONTEXT7_API_KEY}" }
+    },
+    "langchain-docs": {
+      "type": "http",
+      "url": "https://docs.langchain.com/mcp"
+    }
+  }
+}

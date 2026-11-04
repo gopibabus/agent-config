@@ -1,0 +1,13 @@
+# Real secret files: commit only *.example versions
+auth.json
+service.json
+.credentials.json
+providers.json
+.claude.json
+*.local.json
+.env
+.env.*
+
+*.bak
+node_modules/
+.DS_Store
